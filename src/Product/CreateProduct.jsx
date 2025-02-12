@@ -1,20 +1,20 @@
 import React, { useState } from "react";
 import axios from "axios";
-import {toast} from 'react-toastify'
+import { toast } from "react-toastify";
 
 const CreateProduct = () => {
   const [name, setName] = useState("");
   const [price, setPrice] = useState("");
   const [description, setDescription] = useState("");
 
-  const handleSubmit = async(e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     let data = {
       name: name,
       price: price,
       description: description,
     };
-    try{
+    try {
       let result = await axios({
         method: "post",
         url: "http://localhost:8000/product",
@@ -22,16 +22,17 @@ const CreateProduct = () => {
       });
       console.log(result.data.message);
       toast.success(result.data.message);
-    
-    }
-    catch(error){
-      toast.error(error.response.data.message);
 
+      setName("");
+      setPrice("");
+      setDescription("");
+    } catch (error) {
+      toast.error(error.response.data.message);
     }
   };
   return (
     <div>
-     
+      <h1>Product create form</h1>
       <form onSubmit={handleSubmit}>
         <div>
           <div>
