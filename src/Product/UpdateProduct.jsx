@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { toast } from "react-toastify";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 const UpdateProduct = () => {
   const [name, setName] = useState("");
@@ -10,6 +10,7 @@ const UpdateProduct = () => {
   let params = useParams();
   let id = params.id;
   console.log(id);
+  let navigate = useNavigate();
 
   const getData = async () => {
     try {
@@ -39,11 +40,11 @@ const UpdateProduct = () => {
     try {
       let result = await axios({
         method: "patch",
-        url: "http://localhost:8001/product",
+        url: `http://localhost:8001/product/${id}`,
         data: data,
       });
-      console.log(result.data.message);
       toast.success(result.data.message);
+      navigate(`/product/${id}`);
 
       setName("");
       setPrice("");
