@@ -17,7 +17,7 @@ const CreateProduct = () => {
     try {
       let result = await axios({
         method: "post",
-        url: "http://localhost:8000/product",
+        url: "http://localhost:8001/product",
         data: data,
       });
       console.log(result.data.message);

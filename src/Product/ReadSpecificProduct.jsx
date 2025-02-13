@@ -12,7 +12,7 @@ const ReadSpecificProduct = () => {
     try {
       let result = await axios({
         method: "GET",
-        url: `http://localhost:8000/product/${id}`,
+        url: `http://localhost:8001/product/${id}`,
       });
       setProduct(result.data.result);
     } catch (error) {
