@@ -52,7 +52,21 @@ const ReadAllProduct = () => {
               >
                 Edit
               </button>
-              <button>Delete</button>
+              <button
+                onClick={async () => {
+                  try {
+                    let result = await axios({
+                      url: `http://localhost:8001/product/${product._id}`,
+                      method: "delete",
+                    });
+                    toast.success(result.data.message);
+                  } catch (error) {
+                    toast.error(error.response.data.message);
+                  }
+                }}
+              >
+                Delete
+              </button>
             </tr>
           );
         })}
